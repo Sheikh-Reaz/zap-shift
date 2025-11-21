@@ -18,3 +18,20 @@ body {
 }
 
 
+/* Default navbar link style */
+.nav-link {
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: 0.2s ease-in-out;
+}
+
+/* Active link style (Figma: Lime background, bold, dark text) */
+.nav-active {
+  background-color: #CAEB66;
+  color: #03373D;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-weight: 600;
+}
+

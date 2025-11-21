@@ -5,13 +5,9 @@ import ReviewCard from './ReviewCard';
 
 const Reviews = ({ reviewsPromise }) => {
     const reviews = use(reviewsPromise);
-    console.log(reviews);
     return (
         <div className='my-24'>
-            <div className='text-center mb-24'>
-                <h3 className="text-3xl text-center font-bold my-8">What our customers are sayings</h3>
-                <p>Enhance posture, mobility, and well-being effortlessly with Posture Pro. Achieve proper alignment, reduce pain, and strengthen your body with ease!</p>
-            </div>
+
 
             <Swiper
                 loop={true}

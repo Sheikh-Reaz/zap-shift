@@ -5,76 +5,74 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import bannerImg1 from "../../../assets/banner/banner1.png";
 import bannerImg2 from "../../../assets/banner/banner2.png";
 import bannerImg3 from "../../../assets/banner/banner3.png";
+import { Link } from "react-router";
 
 const Banner = () => {
   return (
-    <div
-      style={{
-        position: "relative", // IMPORTANT
-        width: "100%",
-        maxWidth: "1280px",
-        margin: "auto",
-      }}
-    >
+    <div className="relative w-full  mx-auto">
+      
       {/* BUTTONS OVER IMAGE */}
-      <div
-        style={{
-          position: "absolute",
-          top: "80%",
-          left: "60px",
+<div
+  className="
+    absolute z-10 flex gap-3 left-[60px] top-[80%]
 
-          zIndex: 10,
-          display: "flex",
-          flexDirection: "row",
-          gap: "14px",
-        }}
-      >
-        <button
-          style={{
-            padding: "10px 15px",
-            borderRadius: "999px",
-            background: "#C7F075",
-            color: "#062B1F",
-            fontWeight: "600",
-            border: "none",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
-            boxShadow: "0 6px 12px rgba(54, 110, 30, 0.18)",
-          }}
-        >
-          Track Your Parcel
-          <span
-            style={{
-              width: "32px",
-              height: "32px",
-              borderRadius: "50%",
-              background: "rgba(0,0,0,0.05)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontWeight: "bold",
-            }}
-          >
-            →
-          </span>
-        </button>
+    /* Mobile (same) */
+    max-sm: left-0
+    max-sm:top-[72%]
+    max-sm:scale-75
 
-        <button
-          style={{
-            padding: "10px 35px",
-            borderRadius: "10px",
-            background: "white",
-            border: "1px solid #e3e3e3",
-            fontWeight: "600",
-            color: "#222",
-            cursor: "pointer",
-          }}
-        >
-          Be A Rider
-        </button>
-      </div>
+    /* Tablet (same) */
+    sm:scale-90
+
+    /* Large screen (smaller than before) */
+    lg:scale-100     /* was 110 */
+    xl:scale-110     /* was 125 */
+  "
+>
+  {/* Track Parcel Button */}
+  <button
+    className="
+      px-4 py-2 
+      lg:px-5 lg:py-2.5   /* slightly smaller than before */
+      rounded-full 
+      bg-[#C7F075] text-[#062B1F] 
+      font-semibold 
+      flex items-center gap-2 
+      shadow-[0_6px_12px_rgba(54,110,30,0.18)]
+
+      text-xs sm:text-sm lg:text-base
+    "
+  >
+    Track Your Parcel
+    <span
+      className="
+        w-6 h-6 
+        sm:w-7 sm:h-7 
+        lg:w-8 lg:h-8   /* was 9x9 before */
+        rounded-full bg-black/5 
+        flex items-center justify-center 
+        font-bold
+      "
+    >
+      →
+    </span>
+  </button>
+
+  {/* Rider Button */}
+  <Link
+    to={"/rider"}
+    className="
+      px-5 py-2 
+      lg:px-6 lg:py-2.5   /* smaller for large screens */
+      rounded-lg bg-white border border-[#e3e3e3] 
+      font-semibold text-[#222]
+      text-xs sm:text-sm lg:text-base
+    "
+  >
+    Be A Rider
+  </Link>
+</div>
+
 
       {/* CAROUSEL */}
       <Carousel
@@ -86,15 +84,9 @@ const Banner = () => {
         interval={3000}
         transitionTime={700}
       >
-        <div>
-          <img src={bannerImg1} alt="" />
-        </div>
-        <div>
-          <img src={bannerImg2} alt="" />
-        </div>
-        <div>
-          <img src={bannerImg3} alt="" />
-        </div>
+        <div><img src={bannerImg1} alt="" /></div>
+        <div><img src={bannerImg2} alt="" /></div>
+        <div><img src={bannerImg3} alt="" /></div>
       </Carousel>
     </div>
   );

@@ -5,6 +5,10 @@ import How from './how it works/How';
 import OurServices from './our services/OurServices';
 import Brands from './Brands/Brands';
 import Reviews from './Reviews/Reviews';
+import ParcelDelivery from './ParcelDelivery/ParcelDelivery';
+import CustomerSatisfaction from './CustomerSatisfaction/CustomerSatisfaction';
+import WhatOur from './Whatour/Whatour';
+import FAQSection from './FAQSection/FAQSection';
 const reviewsPromise = fetch('/reviews.json').then(res => res.json())
 
 const Home = () => {
@@ -14,8 +18,11 @@ const Home = () => {
             <How></How>
             <OurServices></OurServices>
             <Brands></Brands>
+            <ParcelDelivery></ParcelDelivery>
+            <CustomerSatisfaction/>
+            <WhatOur></WhatOur>
             <Reviews reviewsPromise={reviewsPromise} ></Reviews>
-            
+            <FAQSection/>
         </div>
     );
 };
