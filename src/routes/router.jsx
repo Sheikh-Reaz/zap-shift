@@ -13,6 +13,7 @@ import About from "../pages/About/About";
 
 import MyParcels from "../pages/Dashboard/MyParcels/MyParcels";
 import DashboardLayout from "../layouts/DashboardLayout";
+import Payment from "../pages/Dashboard/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -72,18 +73,20 @@ export const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: 
+    element: (
       <PrivateRoutes>
-    
         <DashboardLayout></DashboardLayout>
       </PrivateRoutes>
-    ,
+    ),
     children: [
       {
         path: "my-parcels",
         Component: MyParcels,
-
       },
+      {
+        path: 'payment/:parcelId',
+        Component: Payment
+      }
     ],
   },
 ]);
