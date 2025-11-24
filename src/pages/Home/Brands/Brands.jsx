@@ -10,7 +10,7 @@ import star from '../../../assets/brands/star.png';
 import starPeople from '../../../assets/brands/start_people.png';
 import { Autoplay } from 'swiper/modules';
 
-const brandLogos = [amazon, amazonVector, casio, moonstar, randstad, star, starPeople];
+const brandLogos = [amazon, amazonVector, casio, moonstar, randstad, star, starPeople,starPeople];
 
 
 const Brands = () => {
@@ -19,7 +19,7 @@ const Brands = () => {
         <h2 className='pb-10 text-center text-4xl font-bold text-[#03373D]'>We've helped thousands of sales teams</h2>     
       <Swiper
         loop={true}
-        slidesPerView={4}
+        slidesPerView={5}
         centeredSlides={true}
         spaceBetween={30}
         grabCursor={true}
