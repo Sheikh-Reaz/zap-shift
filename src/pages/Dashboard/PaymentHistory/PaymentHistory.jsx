@@ -14,32 +14,34 @@ const PaymentHistory = () => {
     },
   });
   return (
-    <div>
-      <h2 className="text-5xl">Payment History: {payments.length} </h2>
-      <div className="overflow-x-auto">
-        <table className="table table-zebra">
-          {/* head */}
-          <thead>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Amount</th>
-              <th>Paid Time</th>
-              <th>Transaction Id</th>
-            </tr>
-          </thead>
-          <tbody>
-            {payments.map((payment , index) => (
-              <tr key={payment._id}>
-                <th>{index+1}</th>
-               
-                <td>${payment.amount} </td>
-                <td>{payment.paidAt} </td>
-                <td> {payment.transactionId} </td>
+    <div className="  ">
+      <div >
+        <h2 className="text-5xl">Payment History: {payments.length} </h2>
+        <div className="overflow-x-auto">
+          <table className="table table-zebra">
+            {/* head */}
+            <thead>
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Paid Time</th>
+                <th>Transaction Id</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {payments.map((payment, index) => (
+                <tr key={payment._id}>
+                  <th>{index + 1}</th>
+
+                  <td>${payment.amount} </td>
+                  <td>{payment.paidAt} </td>
+                  <td> {payment.transactionId} </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

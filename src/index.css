@@ -34,4 +34,14 @@ body {
   border-radius: 9999px;
   font-weight: 600;
 }
+/* Example: renamed to .my-list-gap */
+.list-gap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
 
