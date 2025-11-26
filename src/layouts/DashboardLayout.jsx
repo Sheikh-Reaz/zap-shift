@@ -59,7 +59,7 @@ const DashboardLayout = () => {
 
                   <div className="text-sm">
                     <div className="font-medium">{user?.displayName}</div>
-                    <div className="text-xs opacity-70">Admin</div>
+                    <div className="text-xs opacity-70">{role}</div>
                   </div>
                 </div>
               </div>

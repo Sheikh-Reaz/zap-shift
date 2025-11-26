@@ -7,23 +7,22 @@ import Swal from "sweetalert2";
 
 const UsersManagement = () => {
   const axiosSecure = useAxiosSecure();
-  const [searchText, setSearchText]= useState('')
+  const [searchText, setSearchText] = useState("");
 
-
-
+  // ✅ SUPER ADMIN HARD-CODED
+  const SUPER_ADMIN_EMAIL = "skreazuddin87@gmail.com";
 
   const { refetch, data: users = [] } = useQuery({
-    queryKey: ['users',searchText],
+    queryKey: ["users", searchText],
     queryFn: async () => {
       const res = await axiosSecure.get(`/users?searchText=${searchText}`);
       return res.data;
     },
   });
+
   const handleMakeAdmin = (user) => {
     const roleInfo = { role: "admin" };
     axiosSecure.patch(`/users/${user._id}/role`, roleInfo).then((res) => {
-      console.log(res.data);
-
       if (res.data.modifiedCount) {
         refetch();
         Swal.fire({
@@ -36,6 +35,7 @@ const UsersManagement = () => {
       }
     });
   };
+
   const handleRemoveAdmin = (user) => {
     const roleInfo = { role: "user" };
     axiosSecure.patch(`/users/${user._id}/role`, roleInfo).then((res) => {
@@ -51,10 +51,12 @@ const UsersManagement = () => {
       }
     });
   };
+
   return (
     <div>
       <h2 className="text-4xl">Manage User: {users.length} </h2>
-      <label className="input">
+
+      <label className="input my-4">
         <svg
           className="h-[1em] opacity-50"
           xmlns="http://www.w3.org/2000/svg"
@@ -72,15 +74,15 @@ const UsersManagement = () => {
           </g>
         </svg>
         <input
-        onChange={(e)=>setSearchText(e.target.value)}
+          onChange={(e) => setSearchText(e.target.value)}
           type="text"
           required
           placeholder="Search User"
         />
       </label>
+
       <div className="overflow-x-auto">
         <table className="table">
-          {/* head */}
           <thead>
             <tr>
               <th>No.</th>
@@ -90,44 +92,67 @@ const UsersManagement = () => {
               <th>Others Actions</th>
             </tr>
           </thead>
+
           <tbody>
             {users.map((user, index) => (
-              <tr>
+              <tr key={user._id}>
                 <td>{index + 1}</td>
+
                 <td>
                   <div className="flex items-center gap-3">
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12">
                         <img
                           src={user.photoURL}
-                          alt="Avatar Tailwind CSS Component"
+                          alt="user avatar"
                         />
                       </div>
                     </div>
                     <div>
                       <div className="font-bold">{user.displayName}</div>
-                      <div className="text-sm "> {user.email} </div>
+                      <div className="text-sm">{user.email}</div>
                     </div>
                   </div>
                 </td>
+
                 <td>{user.role}</td>
+
                 <td>
                   {user.role === "admin" ? (
-                    <button
-                      onClick={() => handleRemoveAdmin(user)}
-                      className="btn bg-red-500 "
+                    <span
+                      className={`tooltip ${
+                        user.email === SUPER_ADMIN_EMAIL
+                          ? "tooltip-warning"
+                          : ""
+                      }`}
+                      data-tip={
+                        user.email === SUPER_ADMIN_EMAIL
+                          ? "Super Admin – Cannot be removed"
+                          : "Remove Admin"
+                      }
                     >
-                      <FiShieldOff />
-                    </button>
+                      <button
+                        onClick={() => handleRemoveAdmin(user)}
+                        disabled={user.email === SUPER_ADMIN_EMAIL}
+                        className={`btn ${
+                          user.email === SUPER_ADMIN_EMAIL
+                            ? "bg-gray-400 cursor-not-allowed"
+                            : "bg-red-500"
+                        }`}
+                      >
+                        <FiShieldOff />
+                      </button>
+                    </span>
                   ) : (
                     <button
                       onClick={() => handleMakeAdmin(user)}
-                      className="btn bg-primary "
+                      className="btn bg-primary"
                     >
                       <FaUserShield />
                     </button>
                   )}
                 </td>
+
                 <th>Actions</th>
               </tr>
             ))}

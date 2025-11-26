@@ -136,6 +136,7 @@ const SendParcel = () => {
                         <label className="label">Sender Email</label>
                         <input type="text" {...register('senderEmail')}
                             defaultValue={user?.email}
+                            disabled
                             className="input w-full" placeholder="Sender Email" />
 
                         {/* sender region */}
