@@ -4,9 +4,14 @@ import { FaMotorcycle, FaRegCreditCard } from "react-icons/fa";
 import { Link, NavLink, Outlet } from "react-router";
 import Logo from "../components/Logo";
 import useAuth from "../hooks/useAuth";
+import { FiSettings } from "react-icons/fi";
+import { FaUser, FaUserGroup } from "react-icons/fa6";
+import useRole from "../hooks/useRole";
+import { RiEBikeFill } from "react-icons/ri";
 
 const DashboardLayout = () => {
   const { user } = useAuth();
+  const {role} = useRole();
 
   return (
     <div className="min-h-screen">
@@ -130,7 +135,9 @@ const DashboardLayout = () => {
                   </NavLink>
                 </li>
 
-                <li>
+                      {
+                          role === 'admin' && <>
+                                          <li>
                   <NavLink
                     to="/dashboard/approve-riders"
                     className={({ isActive }) =>
@@ -141,24 +148,35 @@ const DashboardLayout = () => {
                     <span>Approve Rider</span>
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/users-management"
+                    className={({ isActive }) =>
+                      isActive ? "nav-active" : "nav-link"
+                    }
+                  >
+                    <FaUserGroup className="w-4 h-4" />
+                    <span>Users Management</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/assign-riders"
+                    className={({ isActive }) =>
+                      isActive ? "nav-active" : "nav-link"
+                    }
+                  >
+                    <RiEBikeFill className="w-4 h-4" />
+                    <span>Assign Riders</span>
+                  </NavLink>
+                </li>
+                          </>
+                      }
 
                 <li className="mt-4 pt-2 border-t border-base-200 w-full">
                   <button className="w-full text-left flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-base-100">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      strokeLinejoin="round"
-                      strokeLinecap="round"
-                      strokeWidth="2"
-                      fill="none"
-                      stroke="currentColor"
-                      className="w-5 h-5"
-                    >
-                      <path d="M20 7h-9"></path>
-                      <path d="M14 17H5"></path>
-                      <circle cx="17" cy="17" r="3"></circle>
-                      <circle cx="7" cy="7" r="3"></circle>
-                    </svg>
+
+                    <FiSettings className="w-4 h-4" />
                     <span>Settings</span>
                   </button>
                 </li>

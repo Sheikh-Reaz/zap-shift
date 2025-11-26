@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AuthContext } from './AuthContext';
 import {auth} from '../../firebase/firebase.init'
 import {createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile} from 'firebase/auth'
+import Loading from '../../components/Loading';
 
 const AuthProvider = ({children}) => {
 
@@ -41,6 +42,11 @@ useEffect(()=>{
     unSubscribe()
  }
 },[])
+
+
+if(loading){
+    return <Loading></Loading>
+}
     const authInfo ={
         registerUser,
         signInUser,
