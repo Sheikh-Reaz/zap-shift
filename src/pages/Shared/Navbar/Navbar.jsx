@@ -24,22 +24,13 @@ const NavBar = () => {
           Services
         </NavLink>
       </li>
-      <li>
-        <NavLink
-                  className={({ isActive }) =>
-          isActive ? "nav-active" : "nav-link"
-        }
-          to="/about"
-        >
-          About Us
-        </NavLink>
-      </li>
+
       <li>
         <NavLink
           className={({ isActive }) => (isActive ? "nav-active" : "nav-link")}
           to="/send-parcel"
         >
-          Send Parcel
+          Send A Parcel
         </NavLink>
       </li>
       <li>
@@ -47,9 +38,10 @@ const NavBar = () => {
           className={({ isActive }) => (isActive ? "nav-active" : "nav-link")}
           to="/coverage"
         >
-          Coverage
+          Coverage Areas
         </NavLink>
       </li>
+
       {user && (
         <>
           <li>
@@ -62,8 +54,26 @@ const NavBar = () => {
               My Parcels
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "nav-active" : "nav-link"
+              }
+              to="/dashboard"
+            >
+              Dashboard
+            </NavLink>
+          </li>
         </>
       )}
+      <li>
+        <NavLink
+          className={({ isActive }) => (isActive ? "nav-active" : "nav-link")}
+          to="/about"
+        >
+          About Us
+        </NavLink>
+      </li>
     </>
   );
   return (
@@ -78,13 +88,12 @@ const NavBar = () => {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              {" "}
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="M4 6h16M4 12h8m-8 6h16"
-              />{" "}
+              />
             </svg>
           </div>
           <ul
@@ -94,7 +103,7 @@ const NavBar = () => {
             {links}
           </ul>
         </div>
-        <span className="btn btn-ghost text-xl">
+        <span>
           <Logo></Logo>
         </span>
       </div>

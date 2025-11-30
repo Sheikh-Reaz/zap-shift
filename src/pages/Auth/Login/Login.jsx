@@ -12,6 +12,15 @@ const Login = () => {
 
 
     const handleLogin = (data) => {
+        console.log('form data', data);
+        signInUser(data.email, data.password)
+            .then(result => {
+                console.log(result.user)
+                navigate(location?.state || '/')
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     return (

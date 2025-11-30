@@ -1,17 +1,18 @@
 import React from "react";
 import { CiDeliveryTruck } from "react-icons/ci";
-import { FaMotorcycle, FaRegCreditCard } from "react-icons/fa";
+import { FaHome, FaMotorcycle, FaRegCreditCard, FaTasks } from "react-icons/fa";
 import { Link, NavLink, Outlet } from "react-router";
 import Logo from "../components/Logo";
 import useAuth from "../hooks/useAuth";
 import { FiSettings } from "react-icons/fi";
 import { FaUser, FaUserGroup } from "react-icons/fa6";
 import useRole from "../hooks/useRole";
-import { RiEBikeFill } from "react-icons/ri";
+import { RiDashboardHorizontalFill, RiEBikeFill } from "react-icons/ri";
+import { SiGoogletasks } from "react-icons/si";
 
 const DashboardLayout = () => {
   const { user } = useAuth();
-  const {role} = useRole();
+  const { role } = useRole();
 
   return (
     <div className="min-h-screen">
@@ -48,14 +49,12 @@ const DashboardLayout = () => {
               <div className="flex-1" />
 
               <div className="flex items-center gap-4">
-                <button className="btn btn-ghost btn-circle">
-                 
-                </button>
+                <button className="btn btn-ghost btn-circle"></button>
 
                 <div className="hidden sm:flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-base-200" >
-                             <img src={user.photoURL} alt="" />
-                    </div>
+                  <div className="w-8 h-8 rounded-full bg-base-200">
+                    <img src={user.photoURL} alt="" />
+                  </div>
 
                   <div className="text-sm">
                     <div className="font-medium">{user?.displayName}</div>
@@ -67,11 +66,9 @@ const DashboardLayout = () => {
           </nav>
 
           <div className="bg-[#F8F8F8] min-h-screen p-6 lg:p-8">
-            <div className=" mx-auto bg-white rounded-2xl p-10 " >
-                    
-            <Outlet />
+            <div className=" mx-auto bg-white rounded-2xl p-10 ">
+              <Outlet />
             </div>
-        
           </div>
         </div>
 
@@ -89,25 +86,14 @@ const DashboardLayout = () => {
               <ul className="menu list-gap w-full">
                 <li>
                   <Link
-                    to="/"
-                    className={ ({ isActive }) =>
+                    to="/dashboard"
+                    className={({ isActive }) =>
                       isActive ? "nav-active" : "nav-link"
                     }
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      strokeLinejoin="round"
-                      strokeLinecap="round"
-                      strokeWidth="2"
-                      fill="none"
-                      stroke="currentColor"
-                      className="w-5 h-5"
-                    >
-                      <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
-                      <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                    </svg>
-                    <span>Homepage</span>
+                   <RiDashboardHorizontalFill className="w-5 h-5" />
+
+                    <span>Dashboard</span>
                   </Link>
                 </li>
 
@@ -135,47 +121,76 @@ const DashboardLayout = () => {
                   </NavLink>
                 </li>
 
-                      {
-                          role === 'admin' && <>
-                                          <li>
-                  <NavLink
-                    to="/dashboard/approve-riders"
-                    className={({ isActive }) =>
-                      isActive ? "nav-active" : "nav-link"
-                    }
-                  >
-                    <FaMotorcycle className="w-4 h-4" />
-                    <span>Approve Rider</span>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/dashboard/users-management"
-                    className={({ isActive }) =>
-                      isActive ? "nav-active" : "nav-link"
-                    }
-                  >
-                    <FaUserGroup className="w-4 h-4" />
-                    <span>Users Management</span>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/dashboard/assign-riders"
-                    className={({ isActive }) =>
-                      isActive ? "nav-active" : "nav-link"
-                    }
-                  >
-                    <RiEBikeFill className="w-4 h-4" />
-                    <span>Assign Riders</span>
-                  </NavLink>
-                </li>
-                          </>
-                      }
+                {/** Rider Links */}
+
+                {role === "rider" && (
+                  <>
+                    <li>
+                      <NavLink
+                        to="/dashboard/assigned-deliveries"
+                        className={({ isActive }) =>
+                          isActive ? "nav-active" : "nav-link"
+                        }
+                      >
+                        <FaTasks className="w-4 h-4" />
+                        <span>Assigned Deliveries</span>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/dashboard/completed-deliveries"
+                        className={({ isActive }) =>
+                          isActive ? "nav-active" : "nav-link"
+                        }
+                      >
+                        <SiGoogletasks className="w-4 h-4" />
+                        <span>Completed Deliveries</span>
+                      </NavLink>
+                    </li>
+                  </>
+                )}
+
+                {/** Admin Links */}
+                {role === "admin" && (
+                  <>
+                    <li>
+                      <NavLink
+                        to="/dashboard/approve-riders"
+                        className={({ isActive }) =>
+                          isActive ? "nav-active" : "nav-link"
+                        }
+                      >
+                        <FaMotorcycle className="w-4 h-4" />
+                        <span>Approve Rider</span>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/dashboard/users-management"
+                        className={({ isActive }) =>
+                          isActive ? "nav-active" : "nav-link"
+                        }
+                      >
+                        <FaUserGroup className="w-4 h-4" />
+                        <span>Users Management</span>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/dashboard/assign-riders"
+                        className={({ isActive }) =>
+                          isActive ? "nav-active" : "nav-link"
+                        }
+                      >
+                        <RiEBikeFill className="w-4 h-4" />
+                        <span>Assign Riders</span>
+                      </NavLink>
+                    </li>
+                  </>
+                )}
 
                 <li className="mt-4 pt-2 border-t border-base-200 w-full">
                   <button className="w-full text-left flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-base-100">
-
                     <FiSettings className="w-4 h-4" />
                     <span>Settings</span>
                   </button>
